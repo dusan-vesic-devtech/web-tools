@@ -36,6 +36,12 @@ server.route({
   handler: function (request, reply) {
     let url = encodeURIComponent(request.query.url);
 
+    function getServers() {
+      return new Promise((res, rej) => {
+        res(dns.getServers());
+      })
+    }
+
     function getA() {
       return new Promise((res, rej) => {
         dns.resolve4(url, (err, addresses) => {
@@ -82,7 +88,8 @@ server.route({
         let aaaa = await getAAAA();
         let cname = await getCName();
         let ns = await getNs();
-        reply({a, aaaa, cname, ns})
+        let nameServers = await getServers();
+        reply({a, aaaa, cname, ns, nameServers})
       } catch (e) {
         replay({e})
       }
