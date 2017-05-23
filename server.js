@@ -1,3 +1,5 @@
+'use strict';
+
 const Hapi = require('hapi');
 const server = new Hapi.Server();
 const dns = require('dns');
@@ -33,11 +35,37 @@ server.route({
   path: '/tools/dns',
   handler: function (request, reply) {
     let url = encodeURIComponent(request.query.url);
-    dns.resolve4(url, (err, addresses) => {
-      if (err) reply(err);
-      if (!addresses) reply({message: 'No record found'});
-      reply({'A': addresses});
-    });
+
+    function getA() {
+      return new Promise((res, rej) => {
+        dns.resolve4(url, (err, addresses) => {
+          if (err) rej(err);
+          res(addresses);
+        })
+      })
+    }
+
+    function getAAAA() {
+      return new Promise((res, rej) => {
+        dns.resolve6(url, (err, addresses) => {
+          if (err) console.log(err);
+          // if (err) rej(err);
+          res(addresses);
+        })
+      })
+    }
+
+    async function all() {
+      try {
+        let a = await getA();
+        let aaaa = await getAAAA();
+        reply({a, aaaa})
+      } catch (e) {
+        replay({e})
+      }
+    }
+
+    all();
   }
 });
 
