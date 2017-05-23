@@ -55,11 +55,34 @@ server.route({
       })
     }
 
+    function getCName() {
+      return new Promise((res, rej) => {
+        dns.resolveCname(url, (err, addresses) => {
+          if (err) console.log(err);
+          console.log('Adress =>', addresses);
+          // if (err) rej(err);
+          res(addresses);
+        })
+      })
+    }
+
+    function getNs() {
+      return new Promise((res, rej) => {
+        dns.resolveNs(url, (err, addresses) => {
+          if (err) console.log(err);
+          // if (err) rej(err);
+          res(addresses);
+        })
+      })
+    }
+
     async function all() {
       try {
         let a = await getA();
         let aaaa = await getAAAA();
-        reply({a, aaaa})
+        let cname = await getCName();
+        let ns = await getNs();
+        reply({a, aaaa, cname, ns})
       } catch (e) {
         replay({e})
       }
