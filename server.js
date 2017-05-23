@@ -45,7 +45,7 @@ server.route({
     function getA() {
       return new Promise((res, rej) => {
         dns.resolve4(url, (err, addresses) => {
-          if (err) rej(err);
+          if (err) res({err});
           res(addresses);
         })
       })
@@ -54,8 +54,7 @@ server.route({
     function getAAAA() {
       return new Promise((res, rej) => {
         dns.resolve6(url, (err, addresses) => {
-          if (err) console.log(err);
-          // if (err) rej(err);
+          if (err) res({err});
           res(addresses);
         })
       })
@@ -64,9 +63,7 @@ server.route({
     function getCName() {
       return new Promise((res, rej) => {
         dns.resolveCname(url, (err, addresses) => {
-          if (err) console.log(err);
-          console.log('Adress =>', addresses);
-          // if (err) rej(err);
+          if (err) res({err});
           res(addresses);
         })
       })
@@ -75,8 +72,7 @@ server.route({
     function getNs() {
       return new Promise((res, rej) => {
         dns.resolveNs(url, (err, addresses) => {
-          if (err) console.log(err);
-          // if (err) rej(err);
+          if (err) res({err});
           res(addresses);
         })
       })
