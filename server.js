@@ -2,7 +2,9 @@
 
 const Hapi = require('hapi');
 const server = new Hapi.Server();
-const dns = require('dns');
+
+// my imports
+const dnsController = require('./controllers/dnsController');
 
 server.connection({
   port: process.env.PORT || 3000,
@@ -35,62 +37,19 @@ server.route({
   path: '/tools/dns',
   handler: function (request, reply) {
     let url = encodeURIComponent(request.query.url);
-
-    function getServers() {
-      return new Promise((res, rej) => {
-        res(dns.getServers());
-      })
-    }
-
-    function getA() {
-      return new Promise((res, rej) => {
-        dns.resolve4(url, (err, addresses) => {
-          if (err) res({err});
-          res(addresses);
-        })
-      })
-    }
-
-    function getAAAA() {
-      return new Promise((res, rej) => {
-        dns.resolve6(url, (err, addresses) => {
-          if (err) res({err});
-          res(addresses);
-        })
-      })
-    }
-
-    function getCName() {
-      return new Promise((res, rej) => {
-        dns.resolveCname(url, (err, addresses) => {
-          if (err) res({err});
-          res(addresses);
-        })
-      })
-    }
-
-    function getNs() {
-      return new Promise((res, rej) => {
-        dns.resolveNs(url, (err, addresses) => {
-          if (err) res({err});
-          res(addresses);
-        })
-      })
-    }
-
     async function all() {
       try {
-        let a = await getA();
-        let aaaa = await getAAAA();
-        let cname = await getCName();
-        let ns = await getNs();
-        let nameServers = await getServers();
-        reply({a, aaaa, cname, ns, nameServers})
+        let a = await dnsController.getA(url);
+        let aaaa = await dnsController.getAAAA(url);
+        let cname = await dnsController.getCName(url);
+        let ns = await dnsController.getNs(url);
+        let nameServers = await dnsController.getServers(url);
+        reply({ a, aaaa, cname, ns, nameServers })
       } catch (e) {
-        replay({e})
+        console.log(e);
+        reply({ e })
       }
     }
-
     all();
   }
 });
