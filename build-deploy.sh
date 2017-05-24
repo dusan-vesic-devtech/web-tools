@@ -3,7 +3,7 @@
 rm -rf public
 cd client
 npm i
-npm run build
+npm run prod
 mv dist public
 mv public ../
 cd ..
