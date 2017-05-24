@@ -3,9 +3,18 @@ import { Component, OnInit } from '@angular/core';
 @Component({
   selector: 'app-dns',
   template: `
-    <p>
-      dns Works!
-    </p>
+    <div class="row">
+      <div class="card teal lighten-2">
+        <div class="card-content white-text">
+          <span class="card-title">domain name or IP address</span>
+          <div class="row">
+            <div class="input-field col s12">
+              <input class="validate">
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
   `,
   styles: []
 })
