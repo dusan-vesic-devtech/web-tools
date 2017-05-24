@@ -8,6 +8,7 @@ const dnsController = require('./controllers/dnsController');
 
 server.connection({
   port: process.env.PORT || 3000,
+  routes: { cors: true }
 });
 
 server.register(require('inert'), (err) => {
@@ -34,11 +35,12 @@ server.route({
   }
 });
 
+/* test route */
 server.route({
   method: 'GET',
-  path: '/hello',
+  path: '/time',
   handler: function (request, reply) {
-    reply('Hello, world!');
+    reply({time: +new Date()});
   }
 });
 
