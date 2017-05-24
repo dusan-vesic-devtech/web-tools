@@ -1,4 +1,20 @@
-<h1>
-  {{title}}
-</h1>
+<nav>
+  <div class="nav-wrapper light-blue">
+    <a href="#!" class="brand-logo">Web Tools</a>
+    <a href="#" data-activates="mobile-demo" class="button-collapse"><i class="material-icons">menu</i></a>
+    <ul class="right hide-on-med-and-down">
+      <li><a routerLink="/dns">DNS Lookup</a></li>
+      <li><a routerLink="/dns">DNS Lookup</a></li>
+      <li><a href="collapsible.html">Javascript</a></li>
+      <li><a href="mobile.html">Mobile</a></li>
+    </ul>
+    <ul class="side-nav" id="mobile-demo">
+      <li><a routerLink="/dns">DNS Lookup</a></li>
+      <li><a routerLink="/dns">DNS Lookup</a></li>
+      <li><a href="collapsible.html">Javascript</a></li>
+      <li><a href="mobile.html">Mobile</a></li>
+    </ul>
+  </div>
+</nav>
+
 <router-outlet></router-outlet>
