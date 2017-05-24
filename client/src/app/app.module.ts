@@ -6,6 +6,7 @@ import { HttpModule } from '@angular/http';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { DnsComponent } from './dns/dns.component';
+import { ApiService } from './api.service';
 
 @NgModule({
   declarations: [
@@ -18,7 +19,7 @@ import { DnsComponent } from './dns/dns.component';
     HttpModule,
     AppRoutingModule
   ],
-  providers: [],
+  providers: [ApiService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
