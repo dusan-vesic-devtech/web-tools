@@ -17,4 +17,9 @@ export class ApiService {
         console.log(res.time);
       })
   }
+
+  getDnsTools (url) {
+    return this._http.get(`${environment.url}tools/dns?url=${url}`)
+      .map(res => res.json());
+  }
 }
