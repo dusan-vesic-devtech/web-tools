@@ -26,6 +26,16 @@ server.register(require('inert'), (err) => {
 
 server.route({
   method: 'GET',
+  path: '/{param*}',
+  handler: {
+    directory: {
+      path: 'public'
+    }
+  }
+});
+
+server.route({
+  method: 'GET',
   path: '/hello',
   handler: function (request, reply) {
     reply('Hello, world!');
