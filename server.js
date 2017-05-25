@@ -5,6 +5,7 @@ const server = new Hapi.Server();
 
 // my imports
 const dnsController = require('./controllers/dnsController');
+const hashController = require('./controllers/hashController');
 
 server.connection({
   port: process.env.PORT || 3000,
@@ -63,6 +64,16 @@ server.route({
       }
     }
     all();
+  }
+});
+
+server.route({
+  method: 'GET',
+  path: '/tools/md5/{valueToHash}',
+  handler: function (request, reply) {
+    let valueToHash = encodeURIComponent(request.params.valueToHash);
+    valueToHash = hashController.md5Hash(valueToHash);
+    reply({md5: valueToHash});
   }
 });
 
