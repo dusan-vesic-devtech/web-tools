@@ -8,11 +8,11 @@ import { ApiService } from '../api.service';
       <div class="row">
         <div class="card teal lighten-2">
           <div class="card-content white-text">
-            <span class="card-title"></span>
+            <span class="card-title">Domain name</span>
             <div class="row">
               <div class="input-field col s12">
                 <input
-                placeholder="domain name..." 
+                placeholder="type here..." 
                 (ngModelChange)="onChange($event)"
                 [(ngModel)]="name">
               </div>
@@ -32,9 +32,6 @@ import { ApiService } from '../api.service';
   styles: [`
     .wrap {
       margin-top: 2em;
-    }
-    input { 
-      font-size: 2em;
     }
   `]
 })

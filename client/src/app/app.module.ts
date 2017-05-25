@@ -7,11 +7,17 @@ import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { DnsComponent } from './dns/dns.component';
 import { ApiService } from './api.service';
+import { Md5Component } from './md5/md5.component';
+import { Md5Service } from './md5.service';
+import { Sha1Component } from './sha1/sha1.component';
+import { Sha1Service } from './sha1.service';
 
 @NgModule({
   declarations: [
     AppComponent,
-    DnsComponent
+    DnsComponent,
+    Md5Component,
+    Sha1Component
   ],
   imports: [
     BrowserModule,
@@ -19,7 +25,7 @@ import { ApiService } from './api.service';
     HttpModule,
     AppRoutingModule
   ],
-  providers: [ApiService],
+  providers: [ApiService, Md5Service, Sha1Service],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

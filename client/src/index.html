@@ -18,8 +18,9 @@
   <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.98.2/js/materialize.min.js"></script>
   <script>
     $( document ).ready(function() {
-      // Handler for .ready() called.
-      $(".button-collapse").sideNav();
+      $('.button-collapse').sideNav({
+          closeOnClick: true
+      });
     });
   </script>
 </body>
