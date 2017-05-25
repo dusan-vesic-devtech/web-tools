@@ -87,6 +87,14 @@ server.route({
   }
 });
 
+server.route({
+  method: 'GET',
+  path: '/tools/ip',
+  handler: function (request, reply) {
+    reply({ip: request.info.remoteAddress});
+  }
+});
+
 server.start((err) => {
   if (err) {
     throw err;
